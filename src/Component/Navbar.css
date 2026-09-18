@@ -1,0 +1,436 @@
+/* =========================================
+   FIXED THEME (no light/dark switching)
+========================================= */
+
+.navbar {
+  --n-bg: rgba(253, 246, 236, 0.85);
+  --n-text: #2b1d14;
+
+  --n-primary: #b5432b;
+  --n-gold: #d4a24e;
+
+  --n-border: rgba(212, 162, 78, 0.4);
+  --n-shadow: rgba(181, 67, 43, 0.15);
+}
+
+
+/* =========================================
+   NAVBAR SHELL — not sticky, normal flow
+========================================= */
+
+.navbar {
+  position: relative;
+
+  width: 100%;
+  height: 84px;
+
+  background: var(--n-bg);
+  color: var(--n-text);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  box-shadow: 0 8px 24px var(--n-shadow);
+
+  transition: height 0.35s ease, box-shadow 0.4s ease;
+}
+
+.navbar.scrolled {
+  height: 66px;
+  box-shadow: 0 10px 30px var(--n-shadow);
+}
+
+
+/* =========================================
+   GLOWING BOTTOM LINE
+========================================= */
+
+.navbar-bottom-line {
+  width: 100%;
+  height: 3px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--n-primary),
+    var(--n-gold),
+    var(--n-primary),
+    transparent
+  );
+
+  animation: navbarLineGlow 3s ease-in-out infinite;
+}
+
+@keyframes navbarLineGlow {
+  0%, 100% { opacity: 0.55; }
+  50%      { opacity: 1; }
+}
+
+
+/* =========================================
+   CONTAINER
+========================================= */
+
+.navbar-container {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  height: 100%;
+
+  padding: 0 6%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================
+   LOGO
+========================================= */
+
+.restaurant-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  text-decoration: none;
+  color: var(--n-text);
+
+  white-space: nowrap;
+}
+
+.logo-badge {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 20px;
+
+  border-radius: 50%;
+
+  background: linear-gradient(135deg, var(--n-primary), var(--n-gold));
+
+  box-shadow: 0 4px 14px var(--n-shadow);
+
+  transition: transform 0.4s ease;
+}
+
+.restaurant-logo:hover .logo-badge {
+  transform: rotate(-12deg) scale(1.08);
+}
+
+.logo-text {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.logo-text em {
+  font-style: normal;
+  color: var(--n-primary);
+  font-weight: 800;
+}
+
+
+/* =========================================
+   NAV WRAPPER (desktop, > 1050px)
+========================================= */
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 34px;
+}
+
+.nav-links {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  background: rgba(128, 128, 128, 0.08);
+  padding: 6px;
+  border-radius: 999px;
+  border: 1px solid var(--n-border);
+}
+
+.nav-links a {
+  position: relative;
+
+  text-decoration: none;
+  color: var(--n-text);
+
+  font-size: 14.5px;
+  font-weight: 600;
+
+  padding: 8px 16px;
+  border-radius: 999px;
+
+  transition: color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+}
+
+.nav-links a:hover {
+  background: linear-gradient(135deg, var(--n-primary), var(--n-gold));
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+
+/* =========================================
+   ACTIONS
+========================================= */
+
+.nav-actions {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.login-btn {
+  text-decoration: none;
+
+  padding: 9px 20px;
+
+  border: 1.5px solid var(--n-primary);
+  border-radius: 999px;
+
+  color: var(--n-primary) !important;
+  font-weight: 700;
+  font-size: 14px;
+
+  transition: 0.3s ease;
+}
+
+.login-btn:hover {
+  background: var(--n-primary);
+  color: #fff !important;
+  box-shadow: 0 0 16px var(--n-shadow);
+  transform: translateY(-2px);
+}
+
+.cart-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 10px 18px;
+
+  border-radius: 999px;
+
+  background: linear-gradient(135deg, var(--n-primary), var(--n-gold));
+
+  color: white !important;
+  font-weight: 700;
+  font-size: 14px;
+
+  text-decoration: none;
+
+  transition: 0.3s ease;
+}
+
+.cart-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px var(--n-shadow);
+}
+
+
+/* =========================================
+   HAMBURGER — solid gradient button, compact
+   lines (not transparent, not spaced too far)
+========================================= */
+
+.hamburger {
+  display: none;
+
+  width: 42px;
+  height: 42px;
+
+  padding: 0;
+  border: none;
+  border-radius: 12px;
+
+  background: linear-gradient(135deg, var(--n-primary), var(--n-gold));
+  box-shadow: 0 4px 14px var(--n-shadow);
+
+  cursor: pointer;
+
+  position: relative;
+  z-index: 1002;
+
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hamburger:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px var(--n-shadow);
+}
+
+.hamburger span {
+  display: block;
+  width: 20px;
+  height: 2.5px;
+
+  background: #fdf6ec;
+  border-radius: 2px;
+
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: translateY(7.5px) rotate(45deg);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: translateY(-7.5px) rotate(-45deg);
+}
+
+
+/* =========================================
+   TABLET + MOBILE — PUSH-DOWN PANEL
+   (menu takes real space in the page flow,
+   so opening it pushes the page content
+   down, and closing it lets content rise
+   back up — no overlay, no see-through)
+========================================= */
+
+@media (max-width: 1050px) {
+
+  .navbar {
+    height: auto;
+  }
+
+  .navbar.scrolled {
+    height: auto;
+  }
+
+  .navbar-container {
+    flex-wrap: wrap;
+
+    padding: 16px 6%;
+  }
+
+  .restaurant-logo {
+    order: 1;
+  }
+
+  .hamburger {
+    display: flex;
+    order: 2;
+  }
+
+  .nav-menu {
+    order: 3;
+
+    position: static;
+
+    flex-basis: 100%;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 18px;
+
+    background: #fdf6ec;
+
+    /* Fully solid, no fade-in transparency —
+       only the height animates */
+    opacity: 1;
+
+    max-height: 0;
+    padding: 0 0;
+    margin-top: 0;
+    overflow: hidden;
+
+    transition:
+      max-height 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+      padding 0.4s ease,
+      margin-top 0.4s ease;
+  }
+
+  .nav-menu.active {
+    max-height: 600px;
+    padding: 22px 0 28px;
+    margin-top: 16px;
+
+    overflow-y: auto;
+
+    border-top: 1px solid var(--n-border);
+  }
+
+  .nav-links {
+    flex-direction: column;
+    background: none;
+    border: none;
+    gap: 12px;
+
+    width: 100%;
+  }
+
+  .nav-links a {
+    display: block;
+    width: 100%;
+
+    text-align: center;
+
+    font-size: 17px;
+    padding: 10px 0;
+
+    border-radius: 12px;
+  }
+
+  .nav-actions {
+    flex-direction: row;
+    gap: 16px;
+    margin-top: 6px;
+  }
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 500px) {
+  .logo-text {
+    font-size: 18px;
+  }
+
+  .logo-badge {
+    width: 36px;
+    height: 36px;
+    font-size: 17px;
+  }
+
+  .hamburger {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+  }
+
+  .hamburger span {
+    width: 18px;
+  }
+}

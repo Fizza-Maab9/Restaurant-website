@@ -1,0 +1,362 @@
+/* =========================================================
+   LOCAL THEME VARIABLES
+   (independent of outer app theme, so it always matches
+   the Navbar's light/dark toggle correctly)
+========================================================= */
+
+.home-section.theme-light {
+  --home-overlay-1: rgba(253, 246, 236, 0.5);
+  --home-overlay-2: rgba(43, 29, 20, 0.35);
+  --home-overlay-3: rgba(43, 29, 20, 0.75);
+
+  --home-text: #fdf6ec;
+  --home-text-soft: rgba(253, 246, 236, 0.85);
+
+  --home-accent: #d4a24e;
+  --home-gold: #d4a24e;
+
+  --home-badge-bg: rgba(0, 0, 0, 0.25);
+  --home-badge-border: rgba(212, 162, 78, 0.6);
+
+  --home-outline: #fdf6ec;
+  --home-outline-hover-bg: #fdf6ec;
+  --home-outline-hover-text: #2b1d14;
+
+  --home-card-bg: rgba(0, 0, 0, 0.25);
+  --home-card-border: rgba(212, 162, 78, 0.4);
+
+  --home-panel-bg: transparent;
+  --home-panel-border: transparent;
+  --home-text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7), 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.home-section.theme-dark {
+  --home-overlay-1: rgba(16, 10, 6, 0.7);
+  --home-overlay-2: rgba(16, 10, 6, 0.5);
+  --home-overlay-3: rgba(16, 10, 6, 0.9);
+
+  --home-text: #fdf6ec;
+  --home-text-soft: rgba(253, 246, 236, 0.88);
+
+  --home-accent: #d4a24e;
+  --home-gold: #d4a24e;
+
+  --home-badge-bg: rgba(212, 162, 78, 0.12);
+  --home-badge-border: rgba(212, 162, 78, 0.6);
+
+  --home-outline: #fdf6ec;
+  --home-outline-hover-bg: #fdf6ec;
+  --home-outline-hover-text: #2b1d14;
+
+  --home-card-bg: rgba(253, 246, 236, 0.12);
+  --home-card-border: rgba(212, 162, 78, 0.4);
+
+  --home-panel-bg: transparent;
+  --home-panel-border: transparent;
+  --home-text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7), 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+
+/* =========================================================
+   HOME — FULL PAGE IMAGE BACKGROUND
+   (image lives on ::before now, so background-size:cover
+   never gets overridden by the zoom animation — no more
+   tiling/repeat of the picture)
+========================================================= */
+
+.home-section {
+  position: relative;
+
+  min-height: calc(100vh - 84px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  transition: background 0.4s ease;
+}
+
+.home-section::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  z-index: 0;
+
+  background-image:
+    url("https://images.unsplash.com/photo-1753727471395-5ab19d4f1f6e?auto=format&fit=crop&w=1920&q=80");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  transform-origin: center center;
+
+  animation: homeZoom 20s ease-in-out infinite alternate;
+
+  will-change: transform;
+}
+
+@keyframes homeZoom {
+  from { transform: scale(1); }
+  to   { transform: scale(1.12); }
+}
+
+/* Overlay adapts to light/dark theme so text stays readable in both */
+.home-overlay {
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    180deg,
+    var(--home-overlay-1) 0%,
+    var(--home-overlay-2) 45%,
+    var(--home-overlay-3) 100%
+  );
+
+  z-index: 1;
+
+  transition: background 0.4s ease;
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.home-content {
+  position: relative;
+  z-index: 2;
+
+  max-width: 780px;
+
+  padding: 60px 20px;
+
+  text-align: center;
+  color: var(--home-text);
+
+  animation: homeFadeUp 1s ease both;
+}
+
+
+.home-small-title {
+  display: inline-block;
+
+  color: var(--home-accent);
+
+  font-size: 14px;
+  font-weight: 700;
+
+  letter-spacing: 2px;
+  text-transform: uppercase;
+
+  padding: 7px 18px;
+  margin-bottom: 24px;
+
+  border: 1px solid var(--home-badge-border);
+  border-radius: 999px;
+
+  background: var(--home-badge-bg);
+}
+
+
+/* =========================================================
+   HEADING
+========================================================= */
+
+.home-content h1 {
+  font-size: clamp(38px, 6vw, 64px);
+
+  line-height: 1.15;
+
+  margin-bottom: 22px;
+
+  color: var(--home-text);
+  text-shadow: var(--home-text-shadow);
+}
+
+
+.home-content h1 .glow-text {
+  color:  #b5432b;
+  text-shadow: 0 0 22px rgba(0, 0, 0, 0.5);
+}
+
+
+/* =========================================================
+   PARAGRAPH
+========================================================= */
+
+.home-content > p {
+  max-width: 540px;
+  margin: 0 auto 34px;
+  font-weight: bold;
+  text-shadow:0 2px 10px black;
+  font-size: 17px;
+  line-height: 1.8;
+
+  color: var(--home-text-soft);
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.home-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 18px;
+  flex-wrap: wrap;
+
+  margin-bottom: 45px;
+}
+
+
+.primary-btn,
+.secondary-btn {
+  padding: 13px 28px;
+
+  border-radius: 999px;
+
+  font-weight: 700;
+  font-size: 15px;
+
+  transition: all 0.3s ease;
+}
+
+
+.primary-btn {
+  background: linear-gradient(135deg, #b5432b, #d4a24e);
+  color: #fff;
+
+  box-shadow: 0 10px 25px rgba(181, 67, 43, 0.35);
+}
+
+
+.primary-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 32px rgba(212, 162, 78, 0.45);
+}
+
+
+.secondary-btn {
+  border: 1.5px solid var(--home-outline);
+
+  color: var(--home-outline);
+
+  background: transparent;
+}
+
+
+.secondary-btn:hover {
+  transform: translateY(-4px);
+
+  background: var(--home-outline-hover-bg);
+  color: var(--home-outline-hover-text);
+}
+
+
+/* =========================================================
+   FEATURES
+========================================================= */
+
+.home-features {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  gap: 32px;
+
+  margin-bottom: 10px;
+}
+
+
+.home-features div {
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+}
+
+
+.home-features span {
+  font-size: 22px;
+}
+
+
+.home-features p {
+  font-size: 10px;
+  font-weight: bold;
+text-shadow:0 2px 10px black;
+  color: var(--home-text-soft);
+}
+
+
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes homeFadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes floatingCard {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .home-content {
+    padding: 36px 24px;
+  }
+}
+
+
+@media (max-width: 600px) {
+
+  .home-section::before {
+    background-attachment: scroll; /* avoids jitter on mobile */
+  }
+
+  .home-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .home-buttons a {
+    width: 100%;
+  }
+
+  .home-features {
+    gap: 18px;
+  }
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .home-section::before {
+    animation: none;
+  }
+
+  .home-content {
+    animation: none;
+  }
+}

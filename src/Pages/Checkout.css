@@ -1,0 +1,839 @@
+/* =========================================================
+   LOCAL THEME VARIABLES
+========================================================= */
+
+.checkout-section {
+  --k-bg: #fdf6ec;
+  --k-text: #2b1d14;
+  --k-text-soft: rgba(43, 29, 20, 0.65);
+
+  --k-primary: #b5432b;
+  --k-gold: #d4a24e;
+
+  --k-card-bg: #fffaf1;
+  --k-card-bg-2: #fbf1de;
+  --k-border: rgba(212, 162, 78, 0.35);
+
+  --k-input-bg: #fffdf9;
+
+  --k-shadow: rgba(181, 67, 43, 0.15);
+}
+
+
+/* =========================================================
+   CHECKOUT SECTION
+========================================================= */
+
+.checkout-section {
+  position: relative;
+
+  min-height: calc(100vh - 84px);
+  padding: 70px 8%;
+
+  background: var(--k-bg);
+  color: var(--k-text);
+
+  overflow: hidden;
+
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+
+/* =========================================================
+   AMBIENT BACKGROUND MOVEMENT (halchal)
+========================================================= */
+
+.checkout-section::before,
+.checkout-section::after {
+  content: "";
+
+  position: absolute;
+  z-index: 0;
+
+  border-radius: 50%;
+
+  filter: blur(90px);
+
+  opacity: 0.28;
+
+  pointer-events: none;
+}
+
+.checkout-section::before {
+  top: -110px;
+  left: -90px;
+
+  width: 400px;
+  height: 400px;
+
+  background: var(--k-primary);
+
+  animation: floatBlobOne 15s ease-in-out infinite;
+}
+
+.checkout-section::after {
+  bottom: -130px;
+  right: -90px;
+
+  width: 460px;
+  height: 460px;
+
+  background: var(--k-gold);
+
+  animation: floatBlobTwo 19s ease-in-out infinite;
+}
+
+@keyframes floatBlobOne {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.22;
+  }
+
+  50% {
+    transform: translate(55px, 35px) scale(1.15);
+    opacity: 0.36;
+  }
+}
+
+@keyframes floatBlobTwo {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.22;
+  }
+
+  50% {
+    transform: translate(-45px, -25px) scale(1.1);
+    opacity: 0.34;
+  }
+}
+
+.checkout-header,
+.checkout-container {
+  position: relative;
+  z-index: 1;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.checkout-header {
+  text-align: center;
+  margin-bottom: 50px;
+
+  animation: checkoutFade 0.8s ease both;
+}
+
+.checkout-header span {
+  display: inline-block;
+
+  color: var(--k-gold);
+
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 3px;
+
+  margin-bottom: 12px;
+}
+
+.checkout-header h1 {
+  font-size: clamp(32px, 5vw, 55px);
+  margin: 0;
+  font-weight: 800;
+}
+
+.checkout-header h1 strong {
+  color: var(--k-primary);
+}
+
+.checkout-header p {
+  margin-top: 14px;
+
+  color: var(--k-text-soft);
+}
+
+
+/* =========================================================
+   MAIN CONTAINER
+========================================================= */
+
+.checkout-container {
+  max-width: 1150px;
+  margin: auto;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 35px;
+  align-items: start;
+}
+
+
+/* =========================================================
+   FORM / SUMMARY CARDS
+========================================================= */
+
+.checkout-form,
+.checkout-summary {
+  position: relative;
+
+  padding: 30px 32px;
+  border-radius: 20px;
+
+  background:
+    radial-gradient(
+      circle at 15% 0%,
+      rgba(212, 162, 78, 0.16),
+      transparent 55%
+    ),
+    linear-gradient(
+      160deg,
+      var(--k-card-bg),
+      var(--k-card-bg-2)
+    );
+
+  border: 1px solid transparent;
+  background-clip: padding-box;
+
+  box-shadow: 0 15px 40px var(--k-shadow);
+
+  overflow: hidden;
+
+  opacity: 0;
+  transform: translateY(35px);
+
+  animation: checkoutUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+
+  transition: box-shadow 0.4s ease, transform 0.4s ease;
+}
+
+.checkout-form {
+  animation-delay: 0.05s;
+}
+
+.checkout-summary {
+  animation-delay: 0.18s;
+}
+
+
+/* glowing gradient ring around each card */
+
+.checkout-form::before,
+.checkout-summary::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  padding: 1.5px;
+  border-radius: 20px;
+
+  background: linear-gradient(
+    135deg,
+    var(--k-primary),
+    var(--k-gold),
+    transparent 70%
+  );
+
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+
+  mask-composite: exclude;
+
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+
+  -webkit-mask-composite: xor;
+
+  pointer-events: none;
+}
+
+
+/* soft decorative glow in the corner of each card */
+
+.checkout-form::after,
+.checkout-summary::after {
+  content: "";
+
+  position: absolute;
+  top: -60px;
+  right: -60px;
+
+  width: 160px;
+  height: 160px;
+
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    var(--k-gold) 0%,
+    transparent 70%
+  );
+
+  opacity: 0.2;
+
+  pointer-events: none;
+
+  animation: cornerPulse 6s ease-in-out infinite;
+}
+
+@keyframes cornerPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.16;
+  }
+
+  50% {
+    transform: scale(1.15);
+    opacity: 0.26;
+  }
+}
+
+.checkout-form:hover,
+.checkout-summary:hover {
+  transform: translateY(-6px);
+
+  box-shadow: 0 24px 55px var(--k-shadow);
+}
+
+.checkout-form h2,
+.checkout-form .form-group,
+.checkout-form .place-order-btn,
+.checkout-summary h2,
+.checkout-summary .checkout-items,
+.checkout-summary .checkout-total,
+.checkout-summary .back-cart-btn {
+  position: relative;
+  z-index: 1;
+}
+
+.checkout-form h2,
+.checkout-summary h2 {
+  margin-top: 0;
+  margin-bottom: 25px;
+
+  color: var(--k-primary);
+}
+
+
+/* =========================================================
+   FORM GROUP
+========================================================= */
+
+.form-group {
+  margin-bottom: 18px;
+
+  opacity: 0;
+  transform: translateY(12px);
+
+  animation: fieldIn 0.5s ease forwards;
+}
+
+.form-group:nth-child(1) {
+  animation-delay: 0.25s;
+}
+
+.form-group:nth-child(2) {
+  animation-delay: 0.32s;
+}
+
+.form-group:nth-child(3) {
+  animation-delay: 0.39s;
+}
+
+.form-group:nth-child(4) {
+  animation-delay: 0.46s;
+}
+
+.form-group:nth-child(5) {
+  animation-delay: 0.53s;
+}
+
+@keyframes fieldIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+
+  font-weight: 700;
+  font-size: 13.5px;
+
+  color: var(--k-text-soft);
+
+  letter-spacing: 0.3px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 13px 15px;
+
+  border: 1.5px solid var(--k-border);
+  border-radius: 12px;
+
+  background: var(--k-input-bg);
+  color: var(--k-text);
+
+  font-size: 15px;
+  font-family: inherit;
+
+  outline: none;
+
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border-color: var(--k-gold);
+
+  box-shadow: 0 0 0 3px rgba(212, 162, 78, 0.2);
+
+  transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   PLACE ORDER BUTTON
+========================================================= */
+
+.place-order-btn {
+  position: relative;
+
+  width: 100%;
+  border: none;
+
+  padding: 15px 20px;
+  border-radius: 999px;
+
+  background: linear-gradient(
+    135deg,
+    var(--k-primary),
+    var(--k-gold)
+  );
+
+  color: white;
+
+  font-size: 16px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  overflow: hidden;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.place-order-btn::before {
+  content: "";
+
+  position: absolute;
+  top: 0;
+  left: -100%;
+
+  width: 60%;
+  height: 100%;
+
+  background: rgba(255, 255, 255, 0.25);
+
+  transform: skewX(-25deg);
+
+  transition: left 0.5s ease;
+}
+
+.place-order-btn:hover::before {
+  left: 130%;
+}
+
+.place-order-btn:hover {
+  transform: translateY(-3px);
+
+  box-shadow: 0 12px 30px var(--k-shadow);
+}
+
+.place-order-btn:active {
+  transform: translateY(-1px) scale(0.99);
+}
+
+
+/* =========================================================
+   CHECKOUT ITEMS
+========================================================= */
+
+.checkout-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  padding: 15px 0;
+
+  border-bottom: 1px solid var(--k-border);
+
+  opacity: 0;
+  transform: translateX(-15px);
+
+  animation: itemSlideIn 0.5s ease forwards;
+
+  transition: transform 0.3s ease;
+}
+
+.checkout-item:nth-child(1) {
+  animation-delay: 0.3s;
+}
+
+.checkout-item:nth-child(2) {
+  animation-delay: 0.38s;
+}
+
+.checkout-item:nth-child(3) {
+  animation-delay: 0.46s;
+}
+
+.checkout-item:nth-child(4) {
+  animation-delay: 0.54s;
+}
+
+.checkout-item:nth-child(5) {
+  animation-delay: 0.62s;
+}
+
+.checkout-item:nth-child(n+6) {
+  animation-delay: 0.7s;
+}
+
+@keyframes itemSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.checkout-item:hover {
+  transform: translateX(5px);
+}
+
+.checkout-item-image {
+  width: 65px;
+  height: 65px;
+
+  flex-shrink: 0;
+
+  border-radius: 14px;
+  overflow: hidden;
+
+  border: 1px solid var(--k-border);
+}
+
+.checkout-item-image img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transform-origin: center center;
+
+  animation: checkoutKenBurns 10s ease-in-out infinite alternate;
+
+  transition: filter 0.4s ease;
+}
+
+.checkout-item:hover .checkout-item-image img {
+  animation-play-state: paused;
+
+  transform: scale(1.15);
+
+  filter: brightness(0.94);
+}
+
+@keyframes checkoutKenBurns {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+
+  50% {
+    transform: scale(1.06) translate(-1%, -1%);
+  }
+
+  100% {
+    transform: scale(1.09) translate(1%, 1%);
+  }
+}
+
+.checkout-item-info {
+  flex: 1;
+}
+
+.checkout-item-info h3 {
+  margin: 0 0 5px;
+
+  font-size: 16px;
+
+  color: var(--k-text);
+
+  font-weight: 800;
+
+  transition: color 0.3s ease;
+}
+
+.checkout-item:hover .checkout-item-info h3 {
+  color: var(--k-primary);
+}
+
+.checkout-item-info p {
+  margin: 0;
+
+  font-size: 13px;
+
+  color: var(--k-text-soft);
+}
+
+.checkout-item > strong {
+  padding: 5px 11px;
+
+  border-radius: 20px;
+
+  background: var(--k-text);
+  color: var(--k-gold);
+
+  font-size: 13px;
+  font-weight: 800;
+
+  white-space: nowrap;
+
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease;
+}
+
+.checkout-item:hover > strong {
+  transform: translateY(-2px);
+
+  background: var(--k-primary);
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   TOTAL
+========================================================= */
+
+.checkout-divider {
+  height: 1px;
+
+  background: var(--k-border);
+
+  margin: 25px 0;
+}
+
+.checkout-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  font-size: 18px;
+}
+
+.checkout-total strong {
+  color: var(--k-primary);
+
+  font-size: 25px;
+}
+
+
+/* =========================================================
+   BACK BUTTON
+========================================================= */
+
+.back-cart-btn {
+  width: 100%;
+
+  margin-top: 25px;
+
+  padding: 13px;
+
+  border: 1.5px solid var(--k-primary);
+  border-radius: 999px;
+
+  background: transparent;
+  color: var(--k-primary);
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: 0.3s ease;
+}
+
+.back-cart-btn:hover {
+  background: var(--k-primary);
+  color: white;
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 10px 24px var(--k-shadow);
+}
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.no-items {
+  text-align: center;
+
+  color: var(--k-text-soft);
+
+  padding: 30px 0;
+}
+
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes checkoutFade {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes checkoutUp {
+  from {
+    opacity: 0;
+    transform: translateY(35px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+  .checkout-container {
+    grid-template-columns: 1fr;
+  }
+
+  .checkout-summary {
+    order: -1;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+  .checkout-section {
+    padding: 50px 5%;
+  }
+
+  .checkout-section::before,
+  .checkout-section::after {
+    width: 250px;
+    height: 250px;
+
+    filter: blur(60px);
+  }
+
+  .checkout-form,
+  .checkout-summary {
+    padding: 22px;
+
+    border-radius: 18px;
+  }
+
+  .checkout-header {
+    margin-bottom: 35px;
+  }
+
+  .checkout-item {
+    gap: 10px;
+  }
+
+  .checkout-item-image {
+    width: 55px;
+    height: 55px;
+  }
+
+  .checkout-item > strong {
+    font-size: 12px;
+  }
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .checkout-header,
+  .checkout-form,
+  .checkout-summary,
+  .form-group,
+  .checkout-item {
+    animation: none;
+
+    opacity: 1;
+    transform: none;
+  }
+
+  .checkout-section::before,
+  .checkout-section::after,
+  .checkout-form::after,
+  .checkout-summary::after,
+  .checkout-item-image img {
+    animation: none;
+  }
+
+  .checkout-form,
+  .checkout-summary,
+  .checkout-item,
+  .checkout-item-info h3,
+  .checkout-item > strong,
+  .place-order-btn,
+  .back-cart-btn {
+    transition: none;
+  }
+}

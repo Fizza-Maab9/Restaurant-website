@@ -1,0 +1,708 @@
+/* =========================================================
+   FIXED THEME (no light/dark switching — matches
+   Navbar/Footer's single terracotta + gold theme)
+========================================================= */
+
+.about-section {
+  --a-bg: #fdf6ec;
+  --a-text: #2b1d14;
+  --a-text-soft: rgba(43, 29, 20, 0.7);
+
+  --a-primary: #b5432b;
+  --a-gold: #d4a24e;
+
+  --a-card-bg: #ffffff;
+  --a-border: rgba(212, 162, 78, 0.35);
+
+  --a-story-bg: rgba(181, 67, 43, 0.05);
+
+  --a-shadow: rgba(181, 67, 43, 0.15);
+}
+
+
+/* =========================================================
+   SCROLL REVEAL
+   (sections start hidden and animate in only once they
+   scroll into the viewport — see the useReveal hook in
+   About.jsx)
+========================================================= */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* =========================================================
+   TYPEWRITER TEXT
+========================================================= */
+
+.type-accent {
+  color: var(--a-primary);
+}
+
+.type-cursor {
+  display: inline-block;
+
+  margin-left: 2px;
+
+  color: var(--a-gold);
+  font-weight: 400;
+
+  animation: caretBlink 0.8s steps(1) infinite;
+}
+
+@keyframes caretBlink {
+  0%, 50%  { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.text-hidden {
+  min-height: 1.4em;
+}
+
+
+/* =========================================================
+   WHY GRID — staggered reveal once header text is done typing
+========================================================= */
+
+.why-grid .why-card {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.why-grid.revealed .why-card {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.6s ease var(--d, 0s), transform 0.6s ease var(--d, 0s),
+    box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+
+/* =========================================================
+   ABOUT SECTION
+========================================================= */
+
+.about-section {
+  width: 100%;
+  overflow: hidden;
+
+  background: var(--a-bg);
+  color: var(--a-text);
+}
+
+
+/* =========================================================
+   ABOUT HERO
+========================================================= */
+
+.about-hero {
+  min-height: 620px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 70px;
+
+  padding: 80px 8%;
+
+  box-sizing: border-box;
+}
+
+.about-content {
+  width: 50%;
+}
+
+.about-subtitle,
+.section-label {
+  display: inline-block;
+
+  margin-bottom: 14px;
+
+  color: var(--a-gold);
+
+  font-size: 13px;
+  font-weight: 700;
+
+  letter-spacing: 3px;
+}
+
+.about-content h1 {
+  margin: 0 0 22px;
+
+  font-size: clamp(42px, 5vw, 68px);
+
+  line-height: 1.08;
+}
+
+.about-content h1 strong,
+.story-content h2 strong,
+.why-header h2 strong,
+.about-cta h2 strong {
+  color: var(--a-primary);
+}
+
+.about-content p {
+  max-width: 580px;
+
+  margin-bottom: 30px;
+
+  color: var(--a-text-soft);
+
+  font-size: 17px;
+
+  line-height: 1.8;
+}
+
+.about-menu-btn,
+.about-cta-btn {
+  display: inline-block;
+
+  padding: 14px 27px;
+
+  border-radius: 999px;
+
+  background: linear-gradient(135deg, var(--a-primary), var(--a-gold));
+  color: #fff;
+
+  text-decoration: none;
+
+  font-weight: 700;
+
+  transition: 0.3s ease;
+}
+
+.about-menu-btn:hover,
+.about-cta-btn:hover {
+  transform: translateY(-4px);
+
+  box-shadow: 0 12px 28px var(--a-shadow);
+}
+
+
+/* =========================================================
+   HERO IMAGE
+========================================================= */
+
+.about-image {
+  width: 48%;
+
+  position: relative;
+
+  margin: 12px 15px 15px 0;
+}
+
+.about-image img {
+  width: 100%;
+  height: 480px;
+
+  object-fit: cover;
+
+  border-radius: 28px;
+
+  display: block;
+
+  box-shadow: 0 20px 45px var(--a-shadow);
+
+  transition: transform 0.5s ease;
+}
+
+.about-image:hover img {
+  transform: scale(1.02);
+}
+
+.about-image::after {
+  content: "";
+
+  position: absolute;
+
+  width: 100%;
+  height: 100%;
+
+  left: -15px;
+  top: -12px;
+
+  border: 3px solid var(--a-gold);
+
+  border-radius: 28px;
+
+  z-index: -1;
+
+  transition: 0.4s ease;
+}
+
+.about-image:hover::after {
+  left: -10px;
+  top: -8px;
+}
+
+
+/* =========================================================
+   STORY
+========================================================= */
+
+.about-story {
+  display: flex;
+
+  align-items: center;
+
+  gap: 70px;
+
+  padding: 90px 8%;
+
+  background: var(--a-story-bg);
+}
+
+.story-image {
+  width: 45%;
+}
+
+.story-image img {
+  width: 100%;
+  height: 500px;
+
+  object-fit: cover;
+
+  border-radius: 25px;
+
+  display: block;
+
+  box-shadow: 0 20px 45px var(--a-shadow);
+
+  transition: transform 0.5s ease;
+}
+
+.story-image:hover img {
+  transform: scale(1.02);
+}
+
+.story-content {
+  width: 55%;
+}
+
+.story-content h2,
+.why-header h2 {
+  margin: 0 0 20px;
+
+  font-size: clamp(34px, 4vw, 52px);
+
+  line-height: 1.15;
+}
+
+.story-content > p {
+  margin-bottom: 18px;
+
+  color: var(--a-text-soft);
+
+  line-height: 1.8;
+}
+
+
+/* =========================================================
+   STORY FEATURES
+========================================================= */
+
+.story-features {
+  display: flex;
+  flex-direction: column;
+
+  gap: 18px;
+
+  margin-top: 30px;
+}
+
+.story-feature {
+  display: flex;
+
+  align-items: center;
+
+  gap: 16px;
+
+  transition: transform 0.3s ease;
+}
+
+.story-feature:hover {
+  transform: translateX(6px);
+}
+
+.story-feature > span {
+  width: 50px;
+  height: 50px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: linear-gradient(135deg, var(--a-primary), var(--a-gold));
+
+  font-size: 23px;
+
+  box-shadow: 0 6px 16px var(--a-shadow);
+}
+
+.story-feature h3 {
+  margin: 0 0 3px;
+
+  font-size: 17px;
+
+  color: var(--a-text);
+}
+
+.story-feature p {
+  margin: 0;
+
+  color: var(--a-text-soft);
+
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   WHY CHOOSE US
+========================================================= */
+
+.about-why {
+  padding: 90px 8%;
+}
+
+.why-header {
+  max-width: 700px;
+
+  margin: 0 auto 50px;
+
+  text-align: center;
+}
+
+.why-header p {
+  color: var(--a-text-soft);
+
+  line-height: 1.7;
+}
+
+.why-grid {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 22px;
+}
+
+.why-card {
+  padding: 30px 22px;
+
+  text-align: center;
+
+  background: var(--a-card-bg);
+
+  border: 1px solid var(--a-border);
+
+  border-radius: 18px;
+}
+
+.why-card:hover {
+  transform: translateY(-8px);
+
+  border-color: var(--a-gold);
+
+  box-shadow: 0 15px 35px var(--a-shadow);
+}
+
+.why-icon {
+  width: 65px;
+  height: 65px;
+
+  margin: 0 auto 18px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 50%;
+
+  background: linear-gradient(135deg, rgba(181, 67, 43, 0.15), rgba(212, 162, 78, 0.15));
+
+  font-size: 30px;
+
+  transition: transform 0.4s ease;
+}
+
+.why-card:hover .why-icon {
+  transform: rotate(-8deg) scale(1.08);
+}
+
+.why-card h3 {
+  margin-bottom: 10px;
+
+  color: var(--a-text);
+}
+
+.why-card p {
+  margin: 0;
+
+  color: var(--a-text-soft);
+
+  font-size: 14px;
+
+  line-height: 1.7;
+}
+
+
+/* =========================================================
+   CTA
+========================================================= */
+
+.about-cta {
+  margin: 20px 8% 80px;
+
+  padding: 45px 50px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 30px;
+
+  border-radius: 25px;
+
+  background: linear-gradient(135deg, var(--a-primary), var(--a-gold));
+
+  color: white;
+
+  box-shadow: 0 20px 40px var(--a-shadow);
+
+  position: relative;
+
+  overflow: hidden;
+}
+
+.about-cta::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background: radial-gradient(circle at top right, rgba(255,255,255,0.18), transparent 60%);
+}
+
+.about-cta span {
+  position: relative;
+
+  color: rgba(255, 255, 255, 0.85);
+
+  font-size: 12px;
+  font-weight: 700;
+
+  letter-spacing: 3px;
+}
+
+.about-cta h2 {
+  position: relative;
+
+  margin: 8px 0 0;
+
+  font-size: 32px;
+
+  color: #fff;
+}
+
+.about-cta h2 strong {
+  color: #fff;
+  text-decoration: underline;
+  text-decoration-color: rgba(255,255,255,0.5);
+  text-underline-offset: 6px;
+}
+
+.about-cta-btn {
+  position: relative;
+
+  background: #fff;
+
+  color: var(--a-primary) !important;
+
+  white-space: nowrap;
+}
+
+.about-cta-btn:hover {
+  background: #2b1d14;
+
+  color: #fff !important;
+}
+
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes aboutLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes aboutRight {
+  from {
+    opacity: 0;
+    transform: translateX(60px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes cardUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 950px) {
+
+  .about-hero {
+    gap: 40px;
+  }
+
+  .about-content h1 {
+    font-size: 45px;
+  }
+
+  .about-image img {
+    height: 400px;
+  }
+
+  .why-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+  .about-hero {
+    flex-direction: column;
+
+    padding: 60px 5%;
+
+    text-align: center;
+  }
+
+  .about-content,
+  .about-image {
+    width: 100%;
+  }
+
+  .about-content h1 {
+    font-size: 40px;
+  }
+
+  .about-content p {
+    margin-left: auto;
+    margin-right: auto;
+
+    font-size: 15px;
+  }
+
+  /* Center the hero image properly on mobile — the
+     desktop margin (right:15px, left:0) was pushing it
+     off-center, and the gold frame offset made it look
+     shifted. Both are corrected here. */
+  .about-image {
+    max-width: 420px;
+    margin: 25px auto 0;
+  }
+
+  .about-image::after {
+    left: -8px;
+    top: -8px;
+  }
+
+  .about-image img {
+    height: 360px;
+  }
+
+  .about-story {
+    flex-direction: column;
+
+    padding: 65px 5%;
+
+    gap: 40px;
+  }
+
+  .story-image,
+  .story-content {
+    width: 100%;
+  }
+
+  .story-image img {
+    height: 350px;
+  }
+
+  .story-content h2 {
+    font-size: 36px;
+  }
+
+  .why-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-why {
+    padding: 65px 5%;
+  }
+
+  .about-cta {
+    margin: 10px 5% 60px;
+
+    padding: 35px 25px;
+
+    flex-direction: column;
+
+    text-align: center;
+  }
+
+  .about-cta h2 {
+    font-size: 27px;
+  }
+
+  .about-cta-btn {
+    width: 100%;
+
+    text-align: center;
+
+    box-sizing: border-box;
+  }
+}
